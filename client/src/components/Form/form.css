@@ -1,0 +1,101 @@
+.form_container {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: rgba(16, 16, 16, 0.55);
+  background-image: url("../../assets/beats-section/vinyl.png"); /* Update path as necessary */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-blend-mode: overlay;
+  z-index: 0;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.form_heading {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  color: #ff4081;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.user_form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form_group {
+  margin-bottom: 15px;
+}
+
+.form_label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #ff4081;
+}
+
+.form_input,
+.form_select {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ff4081;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 16px;
+  width: 95%;
+}
+
+.form_input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form_select {
+  appearance: none;
+  z-index: 1;
+}
+
+.form_select option {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+.form_select::-ms-expand {
+  display: none;
+}
+
+.form_submit {
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  background-color: #ff4081;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form_submit:hover {
+  background-color: #e60073;
+}
+
+.success-message {
+  margin: 10px 0;
+  color: #00ff00;
+  text-align: center;
+}
+
+.form_group span {
+  cursor: pointer;
+  color: #ff4081;
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.form_group span:hover {
+  color: #e60073;
+}

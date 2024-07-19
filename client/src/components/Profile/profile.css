@@ -1,0 +1,111 @@
+.profile_container {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  color: white;
+  text-align: center;
+}
+
+#profile_video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+  z-index: -1;
+  transition: opacity 0.5s ease;
+}
+
+.profile_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 0;
+}
+
+.profile_image {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile_image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.profile_image > img {
+  border: 4px solid #ff4081;
+  border-radius: 50%;
+  height: 153px;
+  width: 150px;
+  background: #ff4081;
+  margin-bottom: 20px;
+}
+
+.profile_name {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #ff4081;
+  text-shadow: 2px 2px 4px #3d1e6b;
+}
+
+.profile_description {
+  font-size: 16px;
+  font-weight: 400;
+  max-width: 300px;
+  color: #ffb6c1;
+}
+
+.social_icons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 25px;
+}
+
+.social_icons a {
+  color: #ff4081;
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.social_icons a:hover {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .profile_image > img {
+    height: 120px;
+    width: 120px;
+  }
+
+  .profile_name {
+    font-size: 20px;
+  }
+
+  .profile_description {
+    font-size: 14px;
+  }
+
+  .social_icons {
+    top: 5px;
+    right: 5px;
+    font-size: 20px;
+  }
+}
