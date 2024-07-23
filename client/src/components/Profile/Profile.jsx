@@ -1,6 +1,6 @@
 import React from "react";
 import user_image from "../../assets/user.png";
-import user_video from "../../assets/Nike.mp4";
+import user_video from "../../assets/video_bg.mp4";
 import {
   FaFacebookF,
   FaTwitter,
