@@ -77,6 +77,8 @@ const Beats = () => {
     if (currentAudio && currentAudio !== newAudio) {
       currentAudio.pause();
       currentAudio.currentTime = 0;
+      setIsPlaying(false);
+      setTimeout(() => setIsPlaying(true), 200);
     }
 
     if (audioSrcs[index]) {

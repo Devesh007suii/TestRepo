@@ -18,7 +18,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.4;
+  opacity: 0.8;
   z-index: -1;
   transition: opacity 0.5s ease;
 }
@@ -29,7 +29,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.75);
   z-index: 0;
 }
 
