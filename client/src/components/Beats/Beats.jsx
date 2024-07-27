@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef, createRef } from "react";
 import { useLocation } from "react-router-dom";
 import { fetchMusics, deleteMusic } from "../../api";
+import MyBeats from "./MyBeats";
+import BeatsCanvas from "./BeatsCanvas";
 import BeatUpload from "./BeatUpload";
 import Form from "../Form/Form";
-import { MdDelete } from "react-icons/md";
-import disc_image from "../../assets/beats-section/record.png";
-import disc_shade from "../../assets/beats-section/record-shade.png";
-import tonearm from "../../assets/beats-section/player-key.png";
 import "./beats.css";
 
 const Beats = () => {
@@ -20,13 +18,14 @@ const Beats = () => {
   const [musicName, setMusicName] = useState("");
   const [musicData, setMusicData] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const musicRefs = useRef([]);
   const formRef = useRef(null);
 
   useEffect(() => {
     if (analyser) {
-      analyser.fftSize = 256;
-      const bufferLength = analyser.frequencyBinCount;
+      analyser.fftSize = 4096; // Use a larger FFT size for smoother waves
+      const bufferLength = analyser.fftSize;
       const dataArray = new Uint8Array(bufferLength);
 
       const canvas = canvasRef.current;
@@ -36,29 +35,36 @@ const Beats = () => {
         if (!analyser) return;
         requestAnimationFrame(draw);
 
-        analyser.getByteFrequencyData(dataArray);
+        analyser.getByteTimeDomainData(dataArray);
 
         canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
-        canvasCtx.fillStyle = "rgba(0, 0, 0, 0.2)";
-        canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
 
-        const barWidth = (canvas.width / bufferLength) * 2.5;
-        let barHeight;
+        canvasCtx.lineWidth = 2;
+        const gradient = canvasCtx.createLinearGradient(0, 0, canvas.width, 0);
+        gradient.addColorStop(0, "rgba(255, 99, 132, 0.6)");
+        gradient.addColorStop(0.5, "rgba(54, 162, 235, 0.6)");
+        gradient.addColorStop(1, "rgba(75, 192, 192, 0.6)");
+        canvasCtx.strokeStyle = gradient;
+
+        canvasCtx.beginPath();
+        const sliceWidth = (canvas.width * 1.0) / bufferLength;
         let x = 0;
 
         for (let i = 0; i < bufferLength; i++) {
-          barHeight = dataArray[i] / 2;
+          const v = dataArray[i] / 128.0;
+          const y = (v * canvas.height) / 1.75;
 
-          canvasCtx.fillStyle = "rgb(" + (barHeight + 100) + ",50,50)";
-          canvasCtx.fillRect(
-            x,
-            canvas.height - barHeight / 2,
-            barWidth,
-            barHeight
-          );
+          if (i === 0) {
+            canvasCtx.moveTo(x, y);
+          } else {
+            canvasCtx.lineTo(x, y);
+          }
 
-          x += barWidth + 1;
+          x += sliceWidth;
         }
+
+        canvasCtx.lineTo(canvas.width, canvas.height / 2);
+        canvasCtx.stroke();
       };
 
       draw();
@@ -117,12 +123,15 @@ const Beats = () => {
 
   useEffect(() => {
     const getMusicData = async () => {
+      setIsLoading(true);
       try {
         const { data } = await fetchMusics();
-        setMusicData(data.data);
+        setMusicData(data?.data);
         musicRefs.current = data.data.map(() => createRef());
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     getMusicData();
@@ -144,45 +153,20 @@ const Beats = () => {
         <div className="beats-header">
           What type of beat do you want to hear?
         </div>
-        <div className="canvas-container">
-          <canvas ref={canvasRef}></canvas>
-          {musicName !== "" && <div className="music-name">{musicName}</div>}
-        </div>
-        <div className="beats-list">
-          {musicData.map((music_beat, index) => (
-            <div key={music_beat._id} className="beat-item">
-              <div className="audio-container">
-                <audio
-                  ref={musicRefs.current[index]}
-                  src={music_beat.musicFile}
-                  controls
-                  onPlay={() => handleAudioPlay(index, music_beat.musicName)}
-                  onPause={() => setIsPlaying(false)}
-                  controlsList="nodownload"
-                />
-                {isAdmin && (
-                  <span
-                    className="delete-button"
-                    onClick={() => handleDelete(music_beat._id)}
-                  >
-                    <MdDelete />
-                  </span>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="record-player">
-          <div className={`player-main ${isPlaying ? "active" : ""}`}>
-            <img src={disc_image} alt="disc_image" />
-          </div>
-          <div className="player-main-shade">
-            <img src={disc_shade} alt="disc_shade" />
-          </div>
-          <div className={`tonearm ${isPlaying ? "active" : ""}`}>
-            <img src={tonearm} alt="tonearm" />
-          </div>
-        </div>
+        <MyBeats
+          isLoading={isLoading}
+          musicData={musicData}
+          isAdmin={isAdmin}
+          handleAudioPlay={handleAudioPlay}
+          setIsPlaying={setIsPlaying}
+          handleDelete={handleDelete}
+          musicRefs={musicRefs}
+        />
+        <BeatsCanvas
+          canvasRef={canvasRef}
+          musicName={musicName}
+          isPlaying={isPlaying}
+        />
         {isAdmin && <BeatUpload />}
       </div>
       {showForm && <Form isAdmin={isAdmin} formRef={formRef} />}
