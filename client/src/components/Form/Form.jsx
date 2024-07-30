@@ -189,10 +189,10 @@ const Form = ({ isAdmin, formRef }) => {
           </div>
         )}
         {successfully && (
-          <div className="success-message">Data Uploaded Successfully!!</div>
+          <div className="success-message">Review Added Successfully!!</div>
         )}
         <button className="form_submit" type="submit">
-          Upload
+          Submit
         </button>
       </form>
     </div>
