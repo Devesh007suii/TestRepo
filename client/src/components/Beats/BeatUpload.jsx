@@ -12,9 +12,9 @@ const BeatUpload = () => {
   const [fileKey, setFileKey] = useState(Date.now());
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const response = await addMusic(musicData);
-      console.log("Music uploaded successfully:", response.data);
+      await addMusic(musicData);
       setSuccessfully(true);
       clear();
     } catch (error) {
