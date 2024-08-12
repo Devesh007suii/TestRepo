@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://serverside-ia4j.onrender.com",
 });
 
 export const fetchMusics = () => API.get("/my-beats");
