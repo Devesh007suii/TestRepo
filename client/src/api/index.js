@@ -22,11 +22,29 @@ export const deleteMusic = (id) =>
 
 export const addReview = (review) => API.post("/reviews", review);
 
-export const addQuestion = (question) => API.post("/question", { question });
+export const addQuestion = (question) =>
+  API.post(
+    "/question",
+    { question },
+    {
+      headers: {
+        "admin-token": process.env.REACT_APP_SECRET_TOKEN,
+      },
+    }
+  );
 
 export const fetchQuestions = () => API.get("/question");
 
-export const deleteQuestion = (id) => API.delete(`/question/${id}`);
+export const deleteQuestion = (id) =>
+  API.delete(`/question/${id}`, {
+    headers: {
+      "admin-token": process.env.REACT_APP_SECRET_TOKEN,
+    },
+  });
 
 export const updateQuestion = (id, question) =>
-  API.patch(`/question/${id}`, question);
+  API.patch(`/question/${id}`, question, {
+    headers: {
+      "admin-token": process.env.REACT_APP_SECRET_TOKEN,
+    },
+  });

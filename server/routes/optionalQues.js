@@ -5,12 +5,13 @@ import {
   deleteQuestion,
   updateQuestion,
 } from "../controllers/optionalQues.js";
+import { checkAdmin } from "../middleware/admin.js";
 
 const router = Router();
 
-router.post("/", addQuestion);
+router.post("/", checkAdmin, addQuestion);
 router.get("/", getQuestion);
-router.delete("/:id", deleteQuestion);
-router.patch("/:id", updateQuestion);
+router.delete("/:id", checkAdmin, deleteQuestion);
+router.patch("/:id", checkAdmin, updateQuestion);
 
 export default router;

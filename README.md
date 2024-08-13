@@ -6,9 +6,10 @@
 
 ## Overview
 
-- This website allows users to listen to beats that I upload and add their reviews.
-- In the future, I plan to add more questions for users in the review form.
+- This website allows users to listen to beats that I/Admin upload and add their reviews.
+- Admin can add optional questions in the review form dynamically through website.
 - The review form currently includes a main question about whether users want to collaborate with me. If they choose to collaborate, additional questions about the type of collaboration they are interested in will appear.
+- A mail will be sent to me on a successfull review submission so that I cannot miss any feedback.
 
 ## Technologies Used
 

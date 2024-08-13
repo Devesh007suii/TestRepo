@@ -109,7 +109,9 @@ const Beats = () => {
     setMusicName(music_name);
     setIsPlaying(true);
 
-    setTimeout(() => setShowForm(true), 5000);
+    if (!isAdmin) {
+      setTimeout(() => setShowForm(true), 5000);
+    }
   };
 
   const handleDelete = async (id) => {
@@ -170,6 +172,7 @@ const Beats = () => {
         {isAdmin && <BeatUpload />}
       </div>
       {showForm && <Form isAdmin={isAdmin} formRef={formRef} />}
+      {isAdmin && <Form isAdmin={isAdmin} formRef={formRef} />}
     </>
   );
 };
