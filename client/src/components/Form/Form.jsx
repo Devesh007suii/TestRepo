@@ -30,7 +30,6 @@ const Form = ({ isAdmin, formRef }) => {
       try {
         const { data } = await fetchQuestions();
 
-        console.log(data);
         setQuestionsForUser(data.data);
       } catch (error) {
         console.log(error);

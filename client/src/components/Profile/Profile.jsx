@@ -1,7 +1,7 @@
 import React from "react";
 import user_image from "../../assets/devesh_sharma.jpeg";
 import user_video from "../../assets/video_bg.mp4";
-import { FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaInstagram, FaYoutube, FaEnvelope } from "react-icons/fa";
 import { SiBeatstars } from "react-icons/si";
 import "./profile.css";
 
@@ -36,6 +36,9 @@ const Profile = () => {
           rel="noopener noreferrer"
         >
           <FaYoutube />
+        </a>
+        <a href="mailto:drillking59@gmail.com" rel="noopener noreferrer">
+          <FaEnvelope />
         </a>
       </div>
     </div>
