@@ -13,10 +13,6 @@ const quesSchema = new Schema({
     type: String,
     required: true,
   },
-  numberOfQues: {
-    type: Number,
-    default: 1,
-  },
   questions: {
     type: [String],
   },

@@ -5,6 +5,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import musicRoutes from "./routes/adminForm.js";
 import usersReviews from "./routes/usersForm.js";
+import optionalUserQues from "./routes/optionalQues.js";
 
 const app = express();
 dotenv.config();
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 app.use("/my-beats", musicRoutes);
 app.use("/reviews", usersReviews);
+app.use("/question", optionalUserQues);
 
 mongoose
   .connect(process.env.MONGODB_URI, {
