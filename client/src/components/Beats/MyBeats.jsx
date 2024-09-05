@@ -1,5 +1,6 @@
 import React from "react";
 import { MdDelete } from "react-icons/md";
+import disc_image from "../../assets/beats-section/record.png";
 
 const MyBeats = ({
   isLoading,
@@ -19,6 +20,16 @@ const MyBeats = ({
           {musicData.map((music_beat, index) => (
             <div key={music_beat._id} className="beat-item">
               <div className="audio-container">
+                <div className="music-info">
+                  <img
+                    className="music-image"
+                    src={music_beat.musicImg ? music_beat.musicImg : disc_image}
+                    alt={music_beat.musicName}
+                  />
+                  <div className="music-details">
+                    <h3 className="beat-name">{music_beat.musicName}</h3>
+                  </div>
+                </div>
                 <audio
                   ref={musicRefs.current[index]}
                   src={music_beat.musicFile}

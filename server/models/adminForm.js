@@ -9,6 +9,9 @@ const formSchema = new Schema({
     type: String,
     required: true,
   },
+  musicImg: {
+    type: String,
+  },
 });
 
 const musicForm = model("musicForm", formSchema);

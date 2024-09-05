@@ -57,7 +57,37 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 475px;
   gap: 10px;
+}
+
+.music-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 2;
+}
+
+.music-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.music-details {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.beat-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  color: #fff;
 }
 
 audio {
@@ -338,6 +368,11 @@ canvas {
 }
 
 @media (min-width: 320px) and (max-width: 575px) {
+  .audio-container {
+    flex-direction: column;
+    width: auto;
+  }
+
   .record-player {
     width: 200px;
   }
