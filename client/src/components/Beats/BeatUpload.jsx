@@ -7,6 +7,7 @@ const BeatUpload = () => {
   const [musicData, setMusicData] = useState({
     musicName: "",
     musicFile: "",
+    musicImg: "",
   });
   const [successfully, setSuccessfully] = useState(false);
   const [fileKey, setFileKey] = useState(Date.now());
@@ -26,6 +27,7 @@ const BeatUpload = () => {
     setMusicData({
       musicName: "",
       musicFile: "",
+      musicImg: "",
     });
     setFileKey(Date.now);
   };
@@ -35,7 +37,7 @@ const BeatUpload = () => {
       <h2>Upload Music</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Music Name:</label>
+          <label>Music Name: </label>
           <input
             type="text"
             value={musicData.musicName}
@@ -45,7 +47,7 @@ const BeatUpload = () => {
           />
         </div>
         <div>
-          <label>Music File:</label>
+          <label>Music File: </label>
           <FileBase64
             key={fileKey}
             multiple={false}
@@ -53,6 +55,16 @@ const BeatUpload = () => {
               setMusicData({ ...musicData, musicFile: file.base64 })
             }
             accept="audio/*"
+          />
+        </div>
+        <div>
+          <label>Image File: </label>
+          <FileBase64
+            key={fileKey}
+            multiple={false}
+            onDone={(file) =>
+              setMusicData({ ...musicData, musicImg: file.base64 })
+            }
           />
         </div>
         {successfully && (
